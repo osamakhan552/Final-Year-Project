@@ -94,15 +94,16 @@ WSGI_APPLICATION = 'MyInventory.wsgi.application'
 
 DATABASES = {
      "default": {
-        "ENGINE": "django.db.backends.postgresql",
-         "NAME": "postgres",
-         "USER": "osama",
+         "ENGINE": "django.db.backends.postgresql",
+         "NAME": "myinv",
+         "USER": "forDemo",
          "PASSWORD": "root123@",
-         "HOST": "cbinventory.postgres.database.azure.com",
+         "HOST": "for-demo.postgres.database.azure.com",
          "PORT": "5432",
          "OPTIONS":{"sslmode":"require"}
      },
  }
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
