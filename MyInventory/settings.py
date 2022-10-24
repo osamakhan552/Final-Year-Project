@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'MyInventory.wsgi.application'
 DATABASES = {
      "default": {
          "ENGINE": "django.db.backends.postgresql",
-         "NAME": "invDB",
+         "NAME": "dev-invDB",
          "USER": "forDemo",
          "PASSWORD": "root123@",
          "HOST": "for-demo.postgres.database.azure.com",
