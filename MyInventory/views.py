@@ -9,17 +9,15 @@ from rest_framework.views import APIView
 
 class CustomAuthToken(ObtainAuthToken):
 
-    def post(self, request, *args, **kwargs):
-        print(request.data)
+  def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         print("MY TOKEN :",token)
-        print('in myinv')
         return Response({
-            'msg': 'suc____________________k',
+            'msg' : 'Success',
             'token': token.key,
             'userId': user.pk,
             'email': user.email,
