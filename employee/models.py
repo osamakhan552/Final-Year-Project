@@ -28,7 +28,6 @@ class employee(AbstractUser):
     empLname = models.CharField(max_length=255)
     empPhone = models.CharField(max_length=10,default="0000000000",validators=[MinLengthValidator(10)])
     createdAt = models.DateTimeField(auto_now_add=True,editable=False)
-    createdBy = models.ForeignKey(roles,CASCADE,null=True,default=None)
     roleId = models.ForeignKey(roles,CASCADE,related_name="roles" ,null=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

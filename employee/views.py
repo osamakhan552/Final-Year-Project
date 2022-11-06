@@ -45,7 +45,7 @@ class rolesListAPIView(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['^roleName']
     def post(self, request, *args, **kwargs):
-        request.data.update({'createdBy':request.user.roleId.roleId})
+      
         return self.create(request, *args, **kwargs)
     def get_serializer_class(self):
         method = self.request.method
