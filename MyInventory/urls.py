@@ -40,9 +40,9 @@ urlpatterns = [
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('token', CustomAuthToken.as_view()),
-    path('employees/', include('employee.urls')),
-    path('products/', include('product.urls')),
-    path('customers/', include('customer.urls')),
-    path('vendors/', include('vendor.urls')),
+    path('employees', include('employee.urls')),
+    path('products', include('product.urls')),
+    path('customers', include('customer.urls')),
+    path('vendors', include('vendor.urls')),
    
 ]
