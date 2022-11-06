@@ -14,3 +14,16 @@ class employeeWriteSerializer(serializers.ModelSerializer):
 class employeeReadSerializer(serializers.ModelSerializer):
     class Meta(employeeWriteSerializer.Meta):
         depth = 1
+
+class roleReadSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = roles
+        fields = ['roleId','createdBy','createdAt','roleName']
+        read_only_fields = ['roleId','createdAt']
+        depth = 1
+
+class roleWriteSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = roles
+        fields = ['roleId','createdBy','createdAt','roleName',]
+        read_only_fields = ['roleId','createdAt']

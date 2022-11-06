@@ -7,8 +7,9 @@ import jwt
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-class CustomAuthToken(ObtainAuthToken):
 
+class CustomAuthToken(ObtainAuthToken):
+      
   def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
@@ -23,3 +24,4 @@ class CustomAuthToken(ObtainAuthToken):
             'email': user.email,
             'role':user.roleId.roleName
         })
+

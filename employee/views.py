@@ -37,3 +37,32 @@ class usersListAPIView(generics.ListCreateAPIView):
             return employeeWriteSerializer
         else:
             return employeeReadSerializer
+class rolesListAPIView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = roles.objects.all()
+    #serializer_class = roleWriteSerializers
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^roleName']
+    def post(self, request, *args, **kwargs):
+        request.data.update({'createdBy':request.user.roleId.roleId})
+        return self.create(request, *args, **kwargs)
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return roleWriteSerializers
+        else:
+            return roleReadSerializers 
+
+class rolesAPIView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = roles.objects.all()
+    #serializer_class = roleWriteSerializers
+    lookup_url_kwarg = 'pk'
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return roleWriteSerializers
+        else:
+            return roleReadSerializers
