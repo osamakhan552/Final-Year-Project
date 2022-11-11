@@ -22,6 +22,7 @@ class CustomAuthToken(ObtainAuthToken):
             'token': token.key,
             'userId': user.pk,
             'email': user.email,
-            'role':user.roleId.roleName
+            'role':user.roleId.roleName,
+            'name':user.empFname
         })
 
