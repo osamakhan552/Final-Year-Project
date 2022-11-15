@@ -9,6 +9,7 @@ class product(models.Model):
     prodNumber = models.CharField(max_length=255, unique=True, null=True, default=None)
     prodName = models.CharField(max_length = 100)
     amount = models.CharField(max_length=10)
+    quantity = models.CharField(max_length=10,null=True, blank=True,default='0')
     createdAt = models.DateTimeField(auto_now_add=True,editable=False)
 
 

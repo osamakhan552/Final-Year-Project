@@ -22,7 +22,6 @@ class usersListAPIView(generics.ListCreateAPIView):
         user = employeeWriteSerializer(data=request.data)
 
         if user.is_valid():
-
             user.save()
             current_user = employee.objects.get(username = request.data['username'])
             current_user.set_password(request.data['password'])
@@ -37,6 +36,30 @@ class usersListAPIView(generics.ListCreateAPIView):
             return employeeWriteSerializer
         else:
             return employeeReadSerializer
+
+#retrieve Update and delete current user
+class userAPIView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+   
+    lookup_url_kwarg = 'pk'
+    queryset = employee.objects.all()
+    def put(self, request, *args, **kwargs):
+        request.data.pop('username')
+        request.data.pop('password')
+        return self.update(request, *args, **kwargs)
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_active = False
+        instance.save() 
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return employeeWriteSerializer
+        else:
+            return employeeReadSerializer
+       
 class rolesListAPIView(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

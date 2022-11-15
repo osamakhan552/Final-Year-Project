@@ -15,7 +15,21 @@ class createProduct(generics.ListCreateAPIView):
     search_fields = ['^prodName','^prodNumber']
 
     queryset = product.objects.all()
-    serializer_class = productSerializer
+    serializer_class = productWriteSerializer
+
+
+class productAPIView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    lookup_field = "prodId"
+    queryset = product.objects.all()
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return productWriteSerializer
+        else:
+            return productReadSerializer
 
 
 
