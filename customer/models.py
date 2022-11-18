@@ -15,12 +15,13 @@ class customer(models.Model):
     custPhone = models.CharField(max_length = 10,default = '0000000000',validators=[MinLengthValidator(10)])
     address = models.CharField(max_length = 255)
     product = models.ForeignKey(product,on_delete=models.CASCADE)
-    productNumber = models.CharField(max_length = 100)
     expiryDate = models.DateField()
     amount = models.CharField(max_length = 100)
-    technition = models.ForeignKey(employee,on_delete=models.CASCADE)
+    technition = models.ForeignKey(employee,on_delete=models.CASCADE,null=True)
     message = models.BooleanField(default=False)
+    itemQuantity = models.CharField(max_length = 5, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True,editable=False)
+
   
 
     def __str__(self):
@@ -29,13 +30,16 @@ class customer(models.Model):
 
 @receiver(post_save,sender=customer)
 def createMail(sender,instance,created,**kwargs):
+    pro = product.objects.get(prodId = instance.product.prodId)
+    pro.quantity = int(pro.quantity) -  int(instance.itemQuantity)
+    pro.save()
     to = str(instance.custEmail)
     fro='wppl.team@gmail.com'
     subject = "Chaoudhary Batteries"
 
     body = "Dear Customer,"+ \
             "\n\nThank you for choosing our shop to purchase " + str(instance.product.prodName) + "." + \
-            "\nProduct Number: " + str(instance.productNumber) + \
+            "\nProduct Number: " + str(instance.product.prodNumber) + \
             "\nAmount: " + str(instance.amount) + \
             "\nExpiry Date: " + str(instance.expiryDate) + \
             "\n\nThanks and regards\nChaudhary Batteries-Akola\nContact No-0000000000"

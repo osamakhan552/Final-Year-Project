@@ -50,9 +50,9 @@ class vendorApiView(generics.RetrieveUpdateDestroyAPIView):
     def get_serializer_class(self):
         method = self.request.method
         if method == 'PUT' or method == 'POST':
-            return orderWriteSerializer
+            return vendorWriteSerializer
         else:
-            return orderReadSerializer
+            return vendorReadSerializer
 
 
 

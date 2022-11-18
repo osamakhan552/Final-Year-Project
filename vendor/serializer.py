@@ -6,6 +6,7 @@ class vendorWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = VendorMaster
         fields = '__all__'
+        depth = 2
 
 
 class orderWriteSerializer(serializers.ModelSerializer):
