@@ -16,7 +16,14 @@ class createVendor(generics.ListCreateAPIView):
     search_fields = ['^vendorName','^vendorCode']
 
     queryset = VendorMaster.objects.all()
-    serializer_class = vendorWriteSerializer
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return vendorWriteSerializer
+        else:
+            return vendorReadSerializer
+            
+
 
 
 class createOrder(generics.ListCreateAPIView):
