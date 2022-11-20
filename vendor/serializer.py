@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from product.models import product
+from product.serializer import productWriteSerializer,productReadSerializer
 
 class vendorWriteSerializer(serializers.ModelSerializer):
  
@@ -7,7 +9,7 @@ class vendorWriteSerializer(serializers.ModelSerializer):
         model = VendorMaster
         fields = ['createdAt','vendorId','vendorCode','vendorName','vendorAddress','vendorPrimaryEmail','vendorPrimaryPhone','vendorPrimaryName','vendorSecondaryEmail','vendorSecondaryPhone','products']
         read_only_fields = ['createdAt','vendorId']
-        depth = 1
+      
 
 
 class orderWriteSerializer(serializers.ModelSerializer):
