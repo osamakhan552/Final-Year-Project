@@ -2,11 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 class vendorWriteSerializer(serializers.ModelSerializer):
-    
+ 
     class Meta:
         model = VendorMaster
-        fields = '__all__'
-        depth = 2
+        fields = ['createdAt','vendorId','vendorCode','vendorName','vendorAddress','vendorPrimaryEmail','vendorPrimaryPhone','vendorPrimaryName','vendorSecondaryEmail','vendorSecondaryPhone','products']
+        read_only_fields = ['createdAt','vendorId']
+        depth = 1
 
 
 class orderWriteSerializer(serializers.ModelSerializer):
@@ -27,8 +28,9 @@ class vendorReadSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = VendorMaster
-        fields = '__all__'
-        dept = 2
+        fields = ['createdAt','vendorId','vendorCode','vendorName','vendorAddress','vendorPrimaryEmail','vendorPrimaryPhone','vendorPrimaryName','vendorSecondaryEmail','vendorSecondaryPhone','products']
+        read_only_fields = ['createdAt','vendorId']
+        depth = 2
 
 
 class orderReadSerializer(serializers.ModelSerializer):

@@ -38,10 +38,6 @@ class createOrderReceived(generics.ListCreateAPIView):
     serializer_class = orderReceivedWriteSerializer
 
 
-
-
-
-
 class vendorApiView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [TokenAuthentication ]
     permission_classes = [IsAuthenticated]
@@ -53,8 +49,6 @@ class vendorApiView(generics.RetrieveUpdateDestroyAPIView):
             return vendorWriteSerializer
         else:
             return vendorReadSerializer
-
-
 
 
 class orderApiView(generics.RetrieveUpdateDestroyAPIView):
