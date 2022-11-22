@@ -6,13 +6,13 @@ from .models import *
 class customerWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = customer
-        fields = ['custId', 'custFname', 'custLname', 'custEmail','custPhone', 'address', 'product', 'expiryDate','amount','itemQuantity', 'technition', 'message', 'createdAt']
+        fields = ['custId', 'custFname', 'custLname', 'custEmail','custPhone', 'address', 'products', 'expiryDate','amount','itemQuantity', 'message', 'createdAt']
         read_only_fields = ['custId','createdAt']
 
 
 class customerReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = customer
-        fields = ['custId', 'custFname', 'custLname', 'custEmail','custPhone', 'address', 'product', 'expiryDate','itemQuantity', 'amount', 'technition', 'message', 'createdAt']
+        fields = ['custId', 'custFname', 'custLname', 'custEmail','custPhone', 'address', 'products', 'expiryDate','itemQuantity', 'amount', 'message', 'createdAt']
         read_only_fields = ['custId','createdAt']
         depth = 2

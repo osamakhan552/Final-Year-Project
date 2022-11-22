@@ -18,8 +18,10 @@ class createCustomer(generics.ListCreateAPIView):
     search_fields = ['^custFname','^custEmail','^custPhone']
 
     def post(self, request,format = None):
-        if int(request.data['itemQuantity']) <= int(product.objects.get(prodId = request.data['product']).quantity):
+        if int(request.data['itemQuantity']) <= int(product.objects.get(prodId = request.data['products']).quantity):
+            print(request.data['message'])
             customer = customerWriteSerializer(data = request.data)
+            
             print(customer.is_valid())
             if customer.is_valid():
                 customer.save()
