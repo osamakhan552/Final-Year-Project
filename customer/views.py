@@ -12,10 +12,15 @@ from rest_framework.permissions import IsAuthenticated
 class createCustomer(generics.ListCreateAPIView):
     authorization_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = customerWriteSerializer
     queryset = customer.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['^custFname','^custEmail','^custPhone']
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return customerWriteSerializer
+        else:
+            return customerReadSerializer
 
     def post(self, request,format = None):
         if int(request.data['itemQuantity']) <= int(product.objects.get(prodId = request.data['products']).quantity):
