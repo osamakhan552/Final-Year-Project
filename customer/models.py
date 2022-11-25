@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from MyInventory.utils import sendEmail
 
 
+
+
 class customer(models.Model):
     custId = models.UUIDField(primary_key = True,default = uuid.uuid4,editable = False)
     custFname = models.CharField(max_length = 100)

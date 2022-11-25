@@ -5,6 +5,10 @@ import uuid
 from employee.models import employee, roles
 from product.models import product
 from django.core.validators import MinLengthValidator
+from django.dispatch import receiver
+from MyInventory.utils import sendEmail
+from django.db.models.signals import post_save
+
 # Create your models here.
 
 class VendorMaster(models.Model):
@@ -44,3 +48,19 @@ class OrderReceived(models.Model):
 
     def __str__(self):
         return str(self.orderNumber.orderNumber)
+    
+@receiver(post_save,sender=Order)
+def createMail(sender,instance,created,**kwargs):
+    
+    to = str(instance.vendorCode.vendorPrimaryEmail)
+    fro='wppl.team@gmail.com'
+    subject = "Chaoudhary Batteries"
+    
+    body = "Dear Vendor,"+ \
+            "\n\nWe want to purchase following items from you" "." + \
+            "\nProduct Name: "+ str(instance.prodNumber.prodName) +  \
+            "\nQunatity: "+ str(instance.orderQuantity) + \
+            "\nExpected Delivery: " + str(instance.orderDelivery) + \
+            "\n\nThanks and regards\nChaudhary Batteries-Akola\nContact No-0000000000"
+
+    sendEmail(to,subject,body)
