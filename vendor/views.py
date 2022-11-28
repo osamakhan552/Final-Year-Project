@@ -31,8 +31,8 @@ class createOrder(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = ['^orderNumber','^vendorCode']
-
     queryset = Order.objects.all()
+    
     def get_serializer_class(self):
         method = self.request.method
         if method == 'PUT' or method == 'POST':
