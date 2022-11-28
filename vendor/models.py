@@ -35,6 +35,7 @@ class Order(models.Model):
     vendorCode = models.ForeignKey(VendorMaster, on_delete=models.CASCADE)
     orderDelivery = models.DateField()
     createdAt = models.DateTimeField(auto_now_add=True,editable=False)
+    status = models.BooleanField(default=False)
    
 
     def __str__(self):

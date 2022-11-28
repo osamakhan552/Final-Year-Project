@@ -39,7 +39,7 @@ class createOrderReceived(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['^vendorName','^vendorCode']
+    search_fields = ['^orderNumber']
 
     queryset = OrderReceived.objects.all()
     serializer_class = orderReceivedWriteSerializer

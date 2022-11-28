@@ -11,20 +11,22 @@ class vendorWriteSerializer(serializers.ModelSerializer):
         read_only_fields = ['createdAt','vendorId']
       
 
+   
 
 class orderWriteSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['createdAt','orderId','orderNumber','prodNumber','orderQuantity','vendorCode','orderDelivery','status']
+        read_only_fields = ['createdAt','orderId']
 
 
 class orderReceivedWriteSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = OrderReceived
-        fields = '__all__'
-        dept = 2
+        fields = ['createdAt','orderNumber','quantityReceived', 'orderReceiveDate']
+        read_only_fields = ['createdAt','orderReceiveDate']
 
 class vendorReadSerializer(serializers.ModelSerializer):
     
@@ -39,12 +41,14 @@ class orderReadSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['createdAt','orderId','orderNumber','prodNumber','orderQuantity','vendorCode','orderDelivery','status']
+        read_only_fields = ['createdAt','orderId']
         dept = 1
 
 class orderReceivedReadSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = OrderReceived
-        fields = '__all__'
+        fields = ['createdAt','orderNumber','quantityReceived', 'orderReceiveDate']
+        read_only_fields = ['createdAt','orderReceiveDate']
         dept = 2
