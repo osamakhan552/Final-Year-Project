@@ -43,7 +43,7 @@ class orderReadSerializer(serializers.ModelSerializer):
         model = Order
         fields = ['createdAt','orderId','orderNumber','prodNumber','orderQuantity','vendorCode','orderDelivery','status']
         read_only_fields = ['createdAt','orderId']
-        dept = 1
+        dept = 2
 
 class orderReceivedReadSerializer(serializers.ModelSerializer):
     
