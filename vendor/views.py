@@ -33,7 +33,13 @@ class createOrder(generics.ListCreateAPIView):
     search_fields = ['^orderNumber','^vendorCode']
 
     queryset = Order.objects.all()
-    serializer_class = orderWriteSerializer
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT' or method == 'POST':
+            return orderWriteSerializer
+        else:
+            return orderReadSerializer
+
 
 class createOrderReceived(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
