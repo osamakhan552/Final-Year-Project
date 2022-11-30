@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import status,generics,filters
 from rest_framework.response import Response
 from .serializer import *
+from .serializer import orderReceivedReadSerializer
 from .models import *
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -32,7 +33,7 @@ class createOrder(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['^orderNumber','^vendorCode']
     queryset = Order.objects.all()
-    
+
     def get_serializer_class(self):
         method = self.request.method
         if method == 'PUT' or method == 'POST':
@@ -44,11 +45,22 @@ class createOrder(generics.ListCreateAPIView):
 class createOrderReceived(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['^orderNumber']
 
     queryset = OrderReceived.objects.all()
-    serializer_class = orderReceivedWriteSerializer
+
+    filter_backends = [filters.SearchFilter]
+
+    search_fields = ['^orderNumber']
+
+    def get_serializer_class(self):
+        method = self.request.method
+        print("method: "  + method)
+        if method == 'PUT' or method == 'POST':
+            return orderReceivedWriteSerializer
+        else:
+         
+            return orderReceivedReadSerializer
+
 
 
 class vendorApiView(generics.RetrieveUpdateDestroyAPIView):

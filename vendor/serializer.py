@@ -40,16 +40,14 @@ class vendorReadSerializer(serializers.ModelSerializer):
 class orderReadSerializer(serializers.ModelSerializer):
     
     class Meta:
-        print("Run this")
         model = Order
         fields = ['createdAt','orderId','orderNumber','prodNumber','orderQuantity','vendorCode','orderDelivery','status']
         read_only_fields = ['createdAt','orderId']
         depth = 1
 
 class orderReceivedReadSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = OrderReceived
         fields = ['createdAt','orderNumber','quantityReceived', 'orderReceiveDate']
         read_only_fields = ['createdAt','orderReceiveDate']
-        dept = 2
+        depth = 2
